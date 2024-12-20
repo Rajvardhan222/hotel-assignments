@@ -6,7 +6,7 @@ async function getListOfGuests(req,res) {
 
         
 
-        let getGuestForEveryHoteil = `select g.name,g.email,g.phone,g.purposeOfVisit,g.stayFrom,g.stayTo,g.idproofno from hotel_guest hg join guests g on hg.guest = g.id 
+        let getGuestForEveryHoteil = `select g.id, g.name,g.email,g.phone,g.purposeOfVisit,g.stayFrom,g.stayTo,g.idproofno from hotel_guest hg join guests g on hg.guest = g.id 
         join hotels h on hg.hotel = h.id where h.userid = $1 and g.stayTo >= $2`;
 
        
@@ -46,7 +46,7 @@ async function updateGuestDetails(req, res) {
             });
         }
 
-        //does this belong to your hotel
+        //does this belong to your hoteil
 
         let checkHotel = `SELECT * FROM hotel_guest hg JOIN hotels h ON hg.hotel = h.id WHERE hg.guest = $1 AND h.userid = $2`;
 
