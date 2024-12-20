@@ -1,10 +1,10 @@
 import React from 'react'
 
-function InputText() {
+function InputText({className}) {
   return (
-    <input type='text' className='
+    <input type='text' className={` ${className} 
     h-7 px-2 outline-none rounded-md bg-quinary 
-    '/>
+    `}/>
   )
 }
 

@@ -1,27 +1,9 @@
 import React from 'react';
 import { useReactTable, getCoreRowModel, flexRender } from '@tanstack/react-table';
 
-const data = [
-  { name: 'John', age: 28, job: 'Developer' },
-  { name: 'Jane', age: 25, job: 'Designer' },
-];
 
-const columns = [
-  {
-    accessorKey: 'name', 
-    header: 'Name',
-  },
-  {
-    accessorKey: 'age',
-    header: 'Age',
-  },
-  {
-    accessorKey: 'job',
-    header: 'Job Title',
-  },
-];
 
-function Table() {
+function Table({data,columns}) {
   const table = useReactTable({
     data,
     columns,
@@ -29,13 +11,13 @@ function Table() {
   });
 
 return (
-    <div className="p-4">
+    <div className="">
         <table className="min-w-full bg-quinary border ">
-            <thead className="bg-secondary text-quinary">
+            <thead className="bg-secondary text-quinary ">
                 {table.getHeaderGroups().map(headerGroup => (
                     <tr key={headerGroup.id}>
                         {headerGroup.headers.map(header => (
-                            <th key={header.id} className="px-4 py-2 border-b  text-left text-sm font-medium text-quinary">
+                            <th key={header.id} className="px-4 py-2 border-b  text-left text-sm font-medium text-quinary ">
                                 {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
                             </th>
                         ))}
