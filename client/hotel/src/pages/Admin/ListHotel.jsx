@@ -1,8 +1,10 @@
-import React from 'react'
+
+
+
 
 function ListHotel() {
   return (
-    <div>
+    <div className="w-full h-full">
         
     </div>
   )

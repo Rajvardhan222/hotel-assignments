@@ -46,7 +46,7 @@ async function updateGuestDetails(req, res) {
             });
         }
 
-        //does this belong to your hoteil
+        //does this belong to your hotel
 
         let checkHotel = `SELECT * FROM hotel_guest hg JOIN hotels h ON hg.hotel = h.id WHERE hg.guest = $1 AND h.userid = $2`;
 
