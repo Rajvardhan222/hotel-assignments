@@ -1,8 +1,11 @@
 import React from 'react'
+import GuestCheckInForm from '../../components/GuestCheckInForm'
 
 function EditGuest() {
   return (
-    <div>EditGuest</div>
+    <div>
+      <GuestCheckInForm name="Edit Guest Detail" />
+    </div>
   )
 }
 
