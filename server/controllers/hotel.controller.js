@@ -30,9 +30,10 @@ export async function post(req,res) {
         let {name,address} = await req.body;
         let user = await req.user;
         let logo = await req.file;
+        console.log(name,address,logo,user);
         let query = `INSERT INTO hotels(name,address,logo,qr_code,userid) VALUES($1,$2,$3,$4,$5) returning *`;
         let cloudinaryImage = await uploadOnCloudinary(logo.path)
-        let qr_code = await generateQR(`http://localhost:3000/guest-register/${name}`);
+        let qr_code = await generateQR(`http://192.168.43.222:5173/guest-register/${name}`);
 
 
 

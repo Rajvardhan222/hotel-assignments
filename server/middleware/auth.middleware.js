@@ -28,11 +28,12 @@ export let varifyJWT = async (req,res,next)=>{
    }
    console.log('logout',user);
    req.user = user.rows[0];
+   
    next()
    } catch (error) {
       console.log("Error verifying token: ", error.message);
       console.log(`This error occured inside the varifyJWT function in auth.middleware.js`);
-      res.status(500).json({
+      res.status(545).json({
           status: "error",
           message: "Something went wrong while verifying the token",
           errmsg: error.message,

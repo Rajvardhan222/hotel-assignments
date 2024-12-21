@@ -4,7 +4,7 @@ import {forwardRef} from 'react'
 function InputText({className,placeholder,type = "text",options=[],disabled=false,...props},ref) {
   return (
     <>
-      {type === 'option' ? (
+      {type == 'option' ? (
         <select {...props} ref={ref} disabled={disabled} className={` ${className} h-7 px-2 outline-none rounded-md bg-quinary`}>
           {options.map((option, index) => (
             <option key={index}>{option}</option>

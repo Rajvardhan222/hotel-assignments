@@ -8,4 +8,5 @@ router.route("/add").post(varifyJWT,upload.single("logo"),post)
 router.route("/list").get(varifyJWT,getAllHotelList)
 router.route("/qr/:name").get(varifyJWT,getQRcodeByHotelName)
 
+
 export default router;

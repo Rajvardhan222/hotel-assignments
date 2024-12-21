@@ -66,3 +66,24 @@ export async function createHotelAdminAccount(req, res) {
     });
   }
 }
+
+
+export function isUserLoggedIn(req,res) {
+  try {
+    return res.status(200).json({
+      status: "success",
+      message: "User is logged in",
+    });
+  } catch (error) {
+    console.log("Error checking if logged in: ", error.message);
+    console.log(
+      `This error occured inside the isUserLoggedIn function in auth.controller.js`
+    );
+    res.status(500).json({
+      status: "error",
+      message: "Something went wrong while checking if the user is logged in",
+      errmsg: error.message,
+    });
+    
+  }
+}

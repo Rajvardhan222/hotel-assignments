@@ -8,7 +8,7 @@ function Thankyou() {
       <p className="text-lg text-quinary mb-6 text-center">We appreciate your registration. Welcome to our community!</p>
       <p className='text-8xl  md:py-4 text-center animate-pulse'>❤️</p>
      
-      <Link to="/" className=" hover:underline text-tertiary">Go to Homepage</Link>
+      <Link to="/" className=" hover:underline text-tertiary">You can close this page</Link>
     </div>
   )
 }

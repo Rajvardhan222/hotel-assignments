@@ -6,7 +6,7 @@ async function getListOfGuests(req,res) {
 
         
 
-        let getGuestForEveryHoteil = `select g.id, g.name,g.email,g.phone,g.purposeOfVisit,g.stayFrom,g.stayTo,g.idproofno from hotel_guest hg join guests g on hg.guest = g.id 
+        let getGuestForEveryHoteil = `select g.id, g.name,g.email,g.phone,g.purposeOfVisit,g.stayFrom,g.stayTo,g.idproofno,g.address from hotel_guest hg join guests g on hg.guest = g.id 
         join hotels h on hg.hotel = h.id where h.userid = $1 and g.stayTo >= $2`;
 
        
@@ -14,6 +14,7 @@ async function getListOfGuests(req,res) {
        
         let todayDate = date.toISOString().split('T')[0];
         let result = await db.query(getGuestForEveryHoteil, [user.id, todayDate]);
+        
 
         return res.status(201).json({
             status: "success",
@@ -36,10 +37,11 @@ async function getListOfGuests(req,res) {
 async function updateGuestDetails(req, res) {
     try {
         const { id } = req.params;
-        const { name, email, stayFrom, stayTo } = req.body;
+        const { name, email, from, to } = req.body;
         let user = req.user;
+        console.log(id,user.id)
 
-        if (!name || !email || !stayFrom || !stayTo) {
+        if (!name || !email || !from || !to) {
             return res.status(400).json({
                 status: "error",
                 message: "Please provide all the details",
@@ -60,7 +62,7 @@ async function updateGuestDetails(req, res) {
         }
 
         let query = `UPDATE guests SET name = $1, email = $2, stayFrom = $3, stayTo = $4 WHERE id = $5 RETURNING *`;
-        let values = [name, email, stayFrom, stayTo, id];
+        let values = [name, email, from, to, id];
 
         let result = await db.query(query, values);
 
@@ -88,4 +90,40 @@ async function updateGuestDetails(req, res) {
     }
 }
 
-export { getListOfGuests, updateGuestDetails }
+async function getGuestById(req,res) {
+    try {
+        
+        const { id } = req.params;
+        let user = req.user;
+
+        let query = `SELECT g.id, g.name, g.email, g.phone, g.address, g.purposeOfVisit, g.stayFrom, g.stayTo, g.idProofNo,h.id FROM hotel_guest hg JOIN guests g ON hg.guest = g.id JOIN hotels h ON hg.hotel = h.id WHERE g.id = $1 AND h.userid = $2`;
+
+        let result = await db.query(query, [id, user.id]);
+
+         
+
+        if (result.rows.length == 0) {
+            return res.status(404).json({
+                status: "error",
+                message: "Guest not found",
+            });
+        }
+
+        return res.status(200).json({
+            status: "success",
+            message: "Guest fetched successfully",
+            data: result.rows[0],
+        });
+    } catch (error) {
+        
+        console.log("Error getting guest by id: ", error.message);
+        console.log(`This error occured inside the getGuestById function in guestadmin.controller.js`);
+        res.status(500).json({
+            status: "error",
+            message: "Something went wrong while getting the guest by id",
+            errmsg: error.message
+        });
+    }
+}
+
+export { getListOfGuests, updateGuestDetails,getGuestById }

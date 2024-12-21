@@ -14,10 +14,10 @@ let sql_hotel_guest = fs.readFileSync('models/hotel_guest.sql').toString();
 let sql_hotel_user = fs.readFileSync('models/userhotel.sql').toString(); 
 
 const port = process.env.PORT || 8845;
-app.listen(port, async() => {
+app.listen(port,'0.0.0.0', async() => {
     try {
         console.log("Server started on port: ", port);
-        console.log(`http://localhost:${port}`);
+        console.log(process.env.BASE_URL);
         // await db.query(sql_hotel_user)
         // console.log("HotelUser table created")
         // await db.query(sql_hotel)

@@ -4,7 +4,12 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 export const app = express();
 
-app.use(cors());
+app.use(cors(
+    {
+        origin: process.env.BASE_URL,
+        credentials: true
+    }
+));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
